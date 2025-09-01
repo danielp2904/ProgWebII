@@ -1,0 +1,15 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model AcademicEvents.Models.Event
+    <h2>Novo evento</h2>
+    <form method="post">
+        <label>Nome <input asp-for="Name" /></label>
+        <label>Data <input asp-for="Date" type="datetime-local" /></label>
+        <label>Local <input asp-for="Location" /></label>
+        <label>Descrição <textarea asp-for="Description"></textarea></label>
+        <button type="submit">Salvar</button>
+    </form>
+
+}

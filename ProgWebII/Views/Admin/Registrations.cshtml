@@ -1,0 +1,19 @@
+﻿@model IEnumerable<AcademicEvents.Models.Registration>
+@{
+    var ev = (AcademicEvents.Models.Event)ViewBag.Event;
+}
+<h2>Inscritos em: @ev.Name</h2>
+<table>
+    <thead><tr><th>Nome</th><th>Email</th><th>Data da inscrição</th></tr></thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.User!.Name</td>
+                <td>@r.User!.Email</td>
+                <td>@r.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p><a href="/Admin">Voltar</a></p>
