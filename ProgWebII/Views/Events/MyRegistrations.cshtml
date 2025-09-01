@@ -1,22 +1,51 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-    @model IEnumerable<AcademicEvents.Models.Registration>
-    <h2>Minhas inscrições</h2>
-    <table>
-        <thead><tr><th>Evento</th><th>Data</th><th>Local</th><th>Inscrito em</th></tr></thead>
-        <tbody>
-            @foreach (var r in Model)
-            {
-                <tr>
-                    <td>@r.Event!.Name</td>
-                    <td>@r.Event!.Date.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@r.Event!.Location</td>
-                    <td>@r.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+@model IEnumerable<AcademicEvents.Models.Registration>
 
-}
+<div class="container mt-5">
+    <h3 class="mb-4">Minhas inscrições</h3>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-secondary">Você ainda não possui inscrições.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Evento</th>
+                        <th style="width:200px;">Data</th>
+                        <th style="width:260px;">Local</th>
+                        <th style="width:220px;">Inscrito em</th>
+                        <th style="width:140px;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        var passado = r.Event!.Date < DateTime.Now;
+                        <tr>
+                            <td class="fw-medium">@r.Event!.Name</td>
+                            <td>@r.Event!.Date.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@r.Event!.Location</td>
+                            <td>@r.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>
+                                @if (passado)
+                                {
+                                    <span class="badge bg-secondary">Encerrado</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Ativo</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,15 +1,44 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-    @model AcademicEvents.Models.Event
-    <h2>Novo evento</h2>
-    <form method="post">
-        <label>Nome <input asp-for="Name" /></label>
-        <label>Data <input asp-for="Date" type="datetime-local" /></label>
-        <label>Local <input asp-for="Location" /></label>
-        <label>Descrição <textarea asp-for="Description"></textarea></label>
-        <button type="submit">Salvar</button>
-    </form>
+@model AcademicEvents.Models.Event
 
-}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Novo evento</h3>
+
+                    <form method="post" novalidate>
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" placeholder="Digite o nome do evento" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Date" class="form-label"></label>
+                            <input asp-for="Date" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="Date" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Location" class="form-label"></label>
+                            <input asp-for="Location" class="form-control" placeholder="Informe o local" />
+                            <span asp-validation-for="Location" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Description" class="form-label"></label>
+                            <textarea asp-for="Description" rows="4" class="form-control" placeholder="Digite a descrição do evento"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,18 +2,41 @@
 @{
     var ev = (AcademicEvents.Models.Event)ViewBag.Event;
 }
-<h2>Inscritos em: @ev.Name</h2>
-<table>
-    <thead><tr><th>Nome</th><th>Email</th><th>Data da inscrição</th></tr></thead>
-    <tbody>
-        @foreach (var r in Model)
-        {
-            <tr>
-                <td>@r.User!.Name</td>
-                <td>@r.User!.Email</td>
-                <td>@r.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
-            </tr>
-        }
-    </tbody>
-</table>
-<p><a href="/Admin">Voltar</a></p>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">Inscritos em: <span class="text-primary">@ev.Name</span></h3>
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-secondary">
+            Voltar
+        </a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">Nenhum inscrito até o momento.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th style="width:200px;">Data da inscrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in Model)
+                    {
+                        <tr>
+                            <td>@r.User!.Name</td>
+                            <td>@r.User!.Email</td>
+                            <td>@r.RegisteredAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
